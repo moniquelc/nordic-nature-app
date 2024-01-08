@@ -1,6 +1,6 @@
 import {styled, Switch} from '@mui/material'
-import CelsiusIcon from '../../assets/temperature-celsius.svg'
-import FahrenheitIcon from '../../assets/temperature-fahrenheit.svg'
+import CelsiusIcon from '../../../assets/temperature-celsius.svg'
+import FahrenheitIcon from '../../../assets/temperature-fahrenheit.svg'
 
 export const UnitSwitch = styled(Switch)(({theme}) => ({
   width: 62,
