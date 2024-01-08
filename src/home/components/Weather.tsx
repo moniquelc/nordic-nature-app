@@ -1,6 +1,6 @@
 import {useCallback, useEffect, useState} from 'react'
-import {TextField, Autocomplete} from '@mui/material'
-import {Search as SearchIcon, Air, North, South} from '@mui/icons-material'
+import {Autocomplete, TextField} from '@mui/material'
+import {Air, North, South, WaterDropOutlined} from '@mui/icons-material'
 import {Coordinates, WeatherData} from '../../types'
 import {UnitSwitch} from './UnitSwitch'
 import '../styles.scss'
@@ -21,6 +21,7 @@ type SearchProps = {
 
 export const Weather = ({initialCoordinates}: SearchProps) => {
   const [searchResults, setSearchResults] = useState<Data[]>([])
+  const [searchedLocations, setSearchedLocations] = useState<string[]>([])
   const [coordinates, setCoordinates] = useState(initialCoordinates)
   const [metricUnit, setMetricUnit] = useState<boolean>(true)
   const [weatherData, setWeatherData] = useState<WeatherData | undefined>(undefined)
@@ -68,63 +69,88 @@ export const Weather = ({initialCoordinates}: SearchProps) => {
 
   return (
     <div className="weather-container">
-      <div className="search-container">
-        <div className="search-container--input">
-          <SearchIcon sx={{color: 'action.active', mr: 1, my: 0.5}} />
-          <Autocomplete
-            options={searchResults}
-            getOptionLabel={({name, state, country}) => `${name}, ${state}, ${country}`}
-            sx={{width: 300}}
-            filterOptions={x => x}
-            onChange={(_, value: Data | null) => {
-              if (value) {
-                onClickSearch(value)
-              }
-            }}
-            renderInput={params => (
-              <TextField
-                {...params}
-                label="Search location"
-                onChange={(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-                  handleSearch(event.target.value)
-                }}
-              />
-            )}
-          />
-        </div>
-      </div>
-      {weatherData && (
-        <>
-          <div className="weather-header-container">
-            <h2>{`${weatherData.name}, ${weatherData.sys.country}`}</h2>
-            <UnitSwitch
-              checked={metricUnit}
-              onChange={async () => {
-                setMetricUnit(!metricUnit)
+      <div className="search-result-container">
+        <div className="search-container">
+          <div className="search-container--input">
+            <Autocomplete
+              options={searchResults}
+              getOptionLabel={({name, state, country}) => `${name}, ${state}, ${country}`}
+              sx={{width: 300}}
+              filterOptions={x => x}
+              onChange={(_, value: Data | null) => {
+                if (value) {
+                  const {name, country} = value
+                  setSearchedLocations([...searchedLocations, `${name}, ${country}`])
+                  onClickSearch(value)
+                }
               }}
+              renderInput={params => (
+                <TextField
+                  {...params}
+                  label="Search location"
+                  onChange={(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+                    handleSearch(event.target.value)
+                  }}
+                />
+              )}
             />
           </div>
-          <img
-            alt="weather-icon"
-            src={`http://openweathermap.org/img/w/${weatherData.weather[0].icon}.png`}
-          />
-          <h3>{`${Math.round(weatherData.main.temp)} ${unit === 'metric' ? '°C' : '°F'}`}</h3>
-          <p>(Feels like: {Math.round(weatherData.main.feels_like)})</p>
+        </div>
+        {weatherData && (
+          <>
+            <div className="weather-header-container">
+              <h2>{`${weatherData.name}, ${weatherData.sys.country}`}</h2>
+              <UnitSwitch
+                checked={metricUnit}
+                onChange={async () => {
+                  setMetricUnit(!metricUnit)
+                }}
+              />
+            </div>
+            <img
+              alt="weather-icon"
+              src={`http://openweathermap.org/img/w/${weatherData.weather[0].icon}.png`}
+            />
+            <h3>{`${Math.round(weatherData.main.temp)} ${unit === 'metric' ? '°C' : '°F'}`}</h3>
+            <p>{`(Feels like: ${Math.round(weatherData.main.feels_like)} ${
+              unit === 'metric' ? '°C' : '°F'
+            })`}</p>
+            <div className="flex-container temperature-card">
+              <div className="flex-container">
+                <North sx={{color: 'primary.contrastText', mr: 0.5}} />
+                <p>{`${Math.round(weatherData.main.temp_max)} ${
+                  unit === 'metric' ? '°C' : '°F'
+                }`}</p>
+              </div>
+              <div className="flex-container">
+                <South sx={{color: 'primary.contrastText', mr: 0.5}} />
+                <p>{`${Math.round(weatherData.main.temp_min)} ${
+                  unit === 'metric' ? '°C' : '°F'
+                }`}</p>
+              </div>
+              <div className="flex-container">
+                <WaterDropOutlined sx={{color: 'primary.contrastText', mr: 0.5}} />
+                <p>{Math.round(weatherData.main.humidity)}</p>
+              </div>
+              <div className="flex-container">
+                <Air sx={{color: 'primary.contrastText', mr: 0.5}} />
+                <p>{Math.round(weatherData.wind.speed)}</p>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+      {!!searchedLocations.length && (
+        <div className="cards-container">
+          <h4>Recently searched locations:</h4>
           <div className="flex-container">
-            <div className="flex-container">
-              <North sx={{color: 'action.active', mr: 1, my: 0.5}} />
-              <p>Max temp: {Math.round(weatherData.main.temp_max)}</p>
-            </div>
-            <div className="flex-container">
-              <South sx={{color: 'action.active', mr: 1, my: 0.5}} />
-              <p>Min temp: {Math.round(weatherData.main.temp_min)}</p>
-            </div>
-            <div className="flex-container">
-              <Air sx={{color: 'action.active', mr: 1, my: 0.5}} />
-              <p>Wind speed: {weatherData.wind.speed}</p>
-            </div>
+            {searchedLocations.slice(-3).map((location, index) => (
+              <div className="location-card " key={index}>
+                <p>{location}</p>
+              </div>
+            ))}
           </div>
-        </>
+        </div>
       )}
     </div>
   )
