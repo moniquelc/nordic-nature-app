@@ -10,7 +10,7 @@ import './styles.scss'
 const schema = object().shape({
   email: string().email().required('Please insert your email address'),
   password: string()
-    .min(8, 'must be at least 8 characters long')
+    .min(8, 'Password must be at least 8 characters long')
     .required('Please type in your password'),
 })
 
