@@ -3,6 +3,7 @@ import {MapComponent} from './components/Map'
 import {Weather} from './components/Weather'
 import {Navbar} from './components/Navbar'
 import {Coordinates} from '../types'
+import {Loading} from './components/Loading'
 import './styles.scss'
 
 export const Home = () => {
@@ -36,7 +37,7 @@ export const Home = () => {
           </div>
         </>
       ) : (
-        <div>Loading</div>
+        <Loading />
       )}
     </div>
   )
