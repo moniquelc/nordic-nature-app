@@ -30,8 +30,8 @@ export const Home = () => {
         <>
           <div className="home-container">
             <Weather initialCoordinates={coordinates} />
-            <div>
-              <h2 className="home-header">Your current location</h2>
+            <div className="map-container">
+              <h2 className="map-header">Your current location</h2>
               <MapComponent coordinates={coordinates} />
             </div>
           </div>

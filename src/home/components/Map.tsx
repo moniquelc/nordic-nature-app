@@ -23,7 +23,7 @@ const GoogleMaps = ({center}: GoogleMapsProps) => {
     }
   }, [ref, center])
 
-  return <div className="map-container" ref={ref} />
+  return <div className="map" ref={ref} />
 }
 
 type MapComponentProps = {
