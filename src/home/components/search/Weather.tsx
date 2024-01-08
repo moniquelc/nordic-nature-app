@@ -1,5 +1,5 @@
 import {Air, North, South, WaterDropOutlined} from '@mui/icons-material'
-import {UnitSwitch} from '../UnitSwitch'
+import {UnitSwitch} from './UnitSwitch'
 import {WeatherData} from '../../../types'
 import './styles.scss'
 
