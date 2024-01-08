@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import {MapComponent} from './components/Map'
-import {Weather} from './components/Weather'
+import Search from './components/search'
 import {Navbar} from './components/Navbar'
 import {Coordinates} from '../types'
 import {Loading} from './components/Loading'
@@ -24,12 +24,12 @@ export const Home = () => {
   }
 
   return (
-    <div className="container">
+    <div className="home-container">
       <Navbar />
       {coordinates ? (
         <>
-          <div className="home-container">
-            <Weather initialCoordinates={coordinates} />
+          <div className="home-content-container">
+            <Search initialCoordinates={coordinates} />
             <div className="map-container">
               <h2 className="map-header">Your current location</h2>
               <MapComponent coordinates={coordinates} />

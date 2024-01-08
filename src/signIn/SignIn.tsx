@@ -31,8 +31,8 @@ export const SignIn = () => {
   const onSubmit = () => navigate('/home')
 
   return (
-    <div className="container">
-      <div className="content-container">
+    <div className="sign-in-container">
+      <div className="sign-in-content-container">
         <Logo mode="dark" />
         <div className="form-container">
           <form onSubmit={handleSubmit(onSubmit)}>
