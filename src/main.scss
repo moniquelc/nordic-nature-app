@@ -1,0 +1,20 @@
+//delete if not used
+.container {
+  display: flex;
+  width: 100%;
+}
+
+.centered {
+  justify-content: center;
+  align-items: center;
+}
+
+.column-centered {
+  flex-direction: column;
+  justify-content: center;
+}
+
+.flex-container {
+  display: flex;
+  align-items: center;
+}

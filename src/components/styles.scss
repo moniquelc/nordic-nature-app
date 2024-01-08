@@ -1,0 +1,11 @@
+$primary-color: #19747e;
+$secondary-color: #d1e8e2;
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  margin-left: 40px;
+  color: $primary-color;
+  font-size: 24px;
+  font-weight: bold;
+}
