@@ -28,8 +28,12 @@ module.exports = {
         "react"
     ],
     "rules": {
+        "@typescript-eslint/no-floating-promises": "off",
         "@typescript-eslint/explicit-function-return-type": "off",
         "react/react-in-jsx-scope": "off",
         "react/jsx-uses-react": "off",
-    }
+    },
+    "ignorePatterns": [
+        ".eslintrc.js"
+    ]
 }
