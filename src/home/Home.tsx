@@ -10,7 +10,7 @@ export const Home: React.FC = () => {
   const [mapCoordinates, setMapCoordinates] = useState<Coordinates | null>(null)
   const [userCoordinates, setUseCoordinates] = useState<Coordinates | null>(null)
 
-  const hasCoordinates = mapCoordinates !== null && userCoordinates !== null
+  const hasCoordinates = mapCoordinates && userCoordinates
 
   const success = (position: GeolocationPosition) => {
     const { coords } = position
@@ -24,7 +24,7 @@ export const Home: React.FC = () => {
 
   const error = () => { console.log('error - unable to retrieve user location') }
 
-  if (hasCoordinates) {
+  if (!hasCoordinates) {
     navigator.geolocation.getCurrentPosition(success, error)
   }
 

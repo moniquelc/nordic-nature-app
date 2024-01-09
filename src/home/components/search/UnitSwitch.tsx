@@ -1,4 +1,6 @@
 import { styled, Switch } from '@mui/material'
+import CelsiusIcon from '../../../assets/temperature-celsius.svg'
+import FahrenheitIcon from '../../../assets/temperature-fahrenheit.svg'
 
 export const UnitSwitch = styled(Switch)(({ theme }) => ({
   width: 62,
@@ -12,7 +14,7 @@ export const UnitSwitch = styled(Switch)(({ theme }) => ({
       color: '#fff',
       transform: 'translateX(22px)',
       '& .MuiSwitch-thumb:before': {
-        backgroundImage: 'url(\'../../../assets/temperature-celsius.svg\')'
+        backgroundImage: `url(${CelsiusIcon})`
       },
       '& + .MuiSwitch-track': {
         opacity: 1,
@@ -33,7 +35,7 @@ export const UnitSwitch = styled(Switch)(({ theme }) => ({
       top: 0,
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center',
-      backgroundImage: 'url(\'../../../assets/temperature-fahrenheit.svg\')'
+      backgroundImage: `url(${FahrenheitIcon})`
     }
   },
   '& .MuiSwitch-track': {

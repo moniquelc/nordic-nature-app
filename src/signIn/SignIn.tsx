@@ -35,7 +35,7 @@ export const SignIn = () => {
       <div className="sign-in-content-container">
         <Logo mode="dark" />
         <div className="form-container">
-          <form onSubmit={() => handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <TextField
               margin="normal"
               {...register('email')}
@@ -45,8 +45,8 @@ export const SignIn = () => {
               name="email"
               autoComplete="email"
               autoFocus
-              error={errors.email !== null}
-              helperText={errors.email?.message}
+              error={!!errors.email}
+              helperText={errors.email ? errors.email.message : ''}
             />
             <TextField
               margin="normal"
@@ -57,7 +57,7 @@ export const SignIn = () => {
               type="password"
               id="password"
               autoComplete="current-password"
-              error={errors.password !== null}
+              error={!!errors.password}
               helperText={errors.password?.message}
             />
             <PrimaryButton text="Sign In" type="submit" fullWidth />
