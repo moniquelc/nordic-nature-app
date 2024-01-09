@@ -1,3 +1,4 @@
+import React from 'react'
 import { TextField, Grid, Link } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
@@ -19,7 +20,7 @@ interface FormInput {
   password: string
 }
 
-export const SignIn = () => {
+export const SignIn: React.FC = () => {
   const navigate = useNavigate()
 
   const {

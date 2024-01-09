@@ -40,7 +40,7 @@ export const Search: React.FC<SearchProps> = ({ coordinates, setCoordinates }) =
   }, [coordinates, unit])
 
   useEffect(() => {
-    getWeather()
+    getWeather().catch(console.error)
   }, [setIsUnitMetric, getWeather])
 
   const handleSearch = async (value: string) => {
@@ -77,7 +77,7 @@ export const Search: React.FC<SearchProps> = ({ coordinates, setCoordinates }) =
               if (value !== null) {
                 const { name, country } = value
                 setSearchedLocations([...searchedLocations, `${name}, ${country}`])
-                onClickSearch(value)
+                onClickSearch(value).catch(console.error)
               }
             }}
             renderInput={params => (
@@ -85,7 +85,7 @@ export const Search: React.FC<SearchProps> = ({ coordinates, setCoordinates }) =
                 {...params}
                 label="Search location"
                 onChange={(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-                  handleSearch(event.target.value)
+                  handleSearch(event.target.value).catch(console.error)
                 }}
               />
             )}

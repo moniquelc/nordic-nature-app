@@ -8,7 +8,9 @@ import './styles.scss'
 
 export const Home: React.FC = () => {
   const [mapCoordinates, setMapCoordinates] = useState<Coordinates | null>(null)
-  const [userCoordinates, setUseCoordinates] = useState<Coordinates | null>(null)
+  const [userCoordinates, setUseCoordinates] = useState<Coordinates | null>(
+    null
+  )
 
   const hasCoordinates = mapCoordinates && userCoordinates
 
@@ -22,7 +24,9 @@ export const Home: React.FC = () => {
     setMapCoordinates(coordinations)
   }
 
-  const error = () => { console.log('error - unable to retrieve user location') }
+  const error = () => {
+    console.log('error - unable to retrieve user location')
+  }
 
   if (!hasCoordinates) {
     navigator.geolocation.getCurrentPosition(success, error)
@@ -31,18 +35,22 @@ export const Home: React.FC = () => {
   return (
     <div className="home-container">
       <Navbar />
-      {hasCoordinates
-        ? (
+      {hasCoordinates ? (
         <>
           <div className="home-content-container">
-            <Search coordinates={mapCoordinates} setCoordinates={setMapCoordinates} />
-            <MapComponent mapCoordinates={mapCoordinates} userCoordinates={userCoordinates} />
+            <Search
+              coordinates={mapCoordinates}
+              setCoordinates={setMapCoordinates}
+            />
+            <MapComponent
+              mapCoordinates={mapCoordinates}
+              userCoordinates={userCoordinates}
+            />
           </div>
         </>
-          )
-        : (
+      ) : (
         <Loading />
-          )}
+      )}
     </div>
   )
 }
