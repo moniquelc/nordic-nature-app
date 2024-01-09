@@ -1,5 +1,5 @@
-import {render, screen, fireEvent} from '@testing-library/react'
-import {PrimaryButton, SecondaryButton} from './Buttons'
+import { render, screen, fireEvent } from '@testing-library/react'
+import { PrimaryButton, SecondaryButton } from './Buttons'
 
 test('handles click on primary button', () => {
   const onClick = jest.fn()

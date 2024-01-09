@@ -1,18 +1,19 @@
-import {Air, North, South, WaterDropOutlined} from '@mui/icons-material'
-import {UnitSwitch} from './UnitSwitch'
-import {WeatherData} from '../../../types'
+import React from 'react'
+import { Air, North, South, WaterDropOutlined } from '@mui/icons-material'
+import { UnitSwitch } from './UnitSwitch'
+import { type WeatherData } from '../../../types'
 import './styles.scss'
 
-type WeatherProps = {
+interface WeatherProps {
   data: WeatherData
   isUnitMetric: boolean
   setIsUnitMetric: (isUnitMetric: boolean) => void
 }
 
-export const Weather = ({data, isUnitMetric, setIsUnitMetric}: WeatherProps) => {
+export const Weather: React.FC<WeatherProps> = ({ data, isUnitMetric, setIsUnitMetric }) => {
   const unit = isUnitMetric ? 'metric' : 'imperial'
 
-  const {name, sys, weather, main, wind} = data
+  const { name, sys, weather, main, wind } = data
 
   return (
     <>
@@ -20,7 +21,7 @@ export const Weather = ({data, isUnitMetric, setIsUnitMetric}: WeatherProps) => 
         <h2>{`${name}, ${sys.country}`}</h2>
         <UnitSwitch
           checked={unit === 'metric'}
-          onChange={async () => {
+          onChange={() => {
             setIsUnitMetric(!isUnitMetric)
           }}
         />
@@ -30,19 +31,19 @@ export const Weather = ({data, isUnitMetric, setIsUnitMetric}: WeatherProps) => 
       <p>{`(Feels like: ${Math.round(main.feels_like)} ${unit === 'metric' ? '°C' : '°F'})`}</p>
       <div className="flex-container temperature-card">
         <div className="flex-container">
-          <North sx={{color: 'primary.contrastText', mr: 0.5}} />
+          <North sx={{ color: 'primary.contrastText', mr: 0.5 }} />
           <p>{`${Math.round(main.temp_max)} ${unit === 'metric' ? '°C' : '°F'}`}</p>
         </div>
         <div className="flex-container">
-          <South sx={{color: 'primary.contrastText', mr: 0.5}} />
+          <South sx={{ color: 'primary.contrastText', mr: 0.5 }} />
           <p>{`${Math.round(main.temp_min)} ${unit === 'metric' ? '°C' : '°F'}`}</p>
         </div>
         <div className="flex-container">
-          <WaterDropOutlined sx={{color: 'primary.contrastText', mr: 0.5}} />
+          <WaterDropOutlined sx={{ color: 'primary.contrastText', mr: 0.5 }} />
           <p>{Math.round(main.humidity)}</p>
         </div>
         <div className="flex-container">
-          <Air sx={{color: 'primary.contrastText', mr: 0.5}} />
+          <Air sx={{ color: 'primary.contrastText', mr: 0.5 }} />
           <p>{Math.round(wind.speed)}</p>
         </div>
       </div>

@@ -1,10 +1,10 @@
-export type WeatherData = {
-  weather: {
+export interface WeatherData {
+  weather: Array<{
     id: number
     main: string
     description: string
     icon: string
-  }[]
+  }>
   main: {
     temp: number
     feels_like: number
@@ -25,7 +25,7 @@ export type WeatherData = {
   name: string
 }
 
-export type Coordinates = {
+export interface Coordinates {
   lat: number
   lng: number
 }

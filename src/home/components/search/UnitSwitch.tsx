@@ -1,8 +1,6 @@
-import {styled, Switch} from '@mui/material'
-import CelsiusIcon from '../../../assets/temperature-celsius.svg'
-import FahrenheitIcon from '../../../assets/temperature-fahrenheit.svg'
+import { styled, Switch } from '@mui/material'
 
-export const UnitSwitch = styled(Switch)(({theme}) => ({
+export const UnitSwitch = styled(Switch)(({ theme }) => ({
   width: 62,
   height: 34,
   padding: 7,
@@ -14,13 +12,13 @@ export const UnitSwitch = styled(Switch)(({theme}) => ({
       color: '#fff',
       transform: 'translateX(22px)',
       '& .MuiSwitch-thumb:before': {
-        backgroundImage: `url(${CelsiusIcon})`,
+        backgroundImage: 'url(\'../../../assets/temperature-celsius.svg\')'
       },
       '& + .MuiSwitch-track': {
         opacity: 1,
-        backgroundColor: theme.palette.mode === 'light' ? '#8796A5' : '#aab4be',
-      },
-    },
+        backgroundColor: theme.palette.mode === 'light' ? '#8796A5' : '#aab4be'
+      }
+    }
   },
   '& .MuiSwitch-thumb': {
     backgroundColor: '#fff',
@@ -35,12 +33,12 @@ export const UnitSwitch = styled(Switch)(({theme}) => ({
       top: 0,
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center',
-      backgroundImage: `url(${FahrenheitIcon})`,
-    },
+      backgroundImage: 'url(\'../../../assets/temperature-fahrenheit.svg\')'
+    }
   },
   '& .MuiSwitch-track': {
     opacity: 1,
     backgroundColor: theme.palette.mode === 'light' ? '#8796A5' : '#aab4be',
-    borderRadius: 20 / 2,
-  },
+    borderRadius: 20 / 2
+  }
 }))

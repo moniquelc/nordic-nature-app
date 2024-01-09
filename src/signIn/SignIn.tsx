@@ -1,20 +1,20 @@
-import {TextField, Grid, Link} from '@mui/material'
-import {useNavigate} from 'react-router-dom'
-import {useForm} from 'react-hook-form'
-import {object, string} from 'yup'
-import {yupResolver} from '@hookform/resolvers/yup'
-import {Logo} from '../components/Logo'
-import {PrimaryButton} from '../components/Buttons'
+import { TextField, Grid, Link } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
+import { object, string } from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { Logo } from '../components/Logo'
+import { PrimaryButton } from '../components/Buttons'
 import './styles.scss'
 
 const schema = object().shape({
   email: string().email().required('Please insert your email address'),
   password: string()
     .min(8, 'Password must be at least 8 characters long')
-    .required('Please type in your password'),
+    .required('Please type in your password')
 })
 
-type FormInput = {
+interface FormInput {
   email: string
   password: string
 }
@@ -25,17 +25,17 @@ export const SignIn = () => {
   const {
     register,
     handleSubmit,
-    formState: {errors},
-  } = useForm<FormInput>({resolver: yupResolver(schema)})
+    formState: { errors }
+  } = useForm<FormInput>({ resolver: yupResolver(schema) })
 
-  const onSubmit = () => navigate('/home')
+  const onSubmit = () => { navigate('/home') }
 
   return (
     <div className="sign-in-container">
       <div className="sign-in-content-container">
         <Logo mode="dark" />
         <div className="form-container">
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={() => handleSubmit(onSubmit)}>
             <TextField
               margin="normal"
               {...register('email')}
@@ -45,8 +45,8 @@ export const SignIn = () => {
               name="email"
               autoComplete="email"
               autoFocus
-              error={!!errors.email}
-              helperText={errors.email ? errors.email.message : ''}
+              error={errors.email !== null}
+              helperText={errors.email?.message}
             />
             <TextField
               margin="normal"
@@ -57,8 +57,8 @@ export const SignIn = () => {
               type="password"
               id="password"
               autoComplete="current-password"
-              error={!!errors.password}
-              helperText={errors.password && errors.password.message}
+              error={errors.password !== null}
+              helperText={errors.password?.message}
             />
             <PrimaryButton text="Sign In" type="submit" fullWidth />
             <Grid container>
