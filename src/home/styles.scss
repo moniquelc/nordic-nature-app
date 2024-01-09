@@ -19,19 +19,9 @@ $primary-color: #19747e;
   }
 }
 
-.map-header {
-  text-align: center;
-  color: $primary-color;
-}
-
 .map-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.map {
-  width: 400px;
-  height: 400px;
+  width: 480px;
+  height: 480px;
   @media (max-width: '767px') {
     align-self: center;
   }

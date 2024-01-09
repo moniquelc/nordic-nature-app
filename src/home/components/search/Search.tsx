@@ -15,13 +15,13 @@ type LocationData = {
 }
 
 type SearchProps = {
-  initialCoordinates: Coordinates
+  coordinates: Coordinates
+  setCoordinates: (coordinates: Coordinates) => void
 }
 
-export const Search = ({initialCoordinates}: SearchProps) => {
+export const Search = ({coordinates, setCoordinates}: SearchProps) => {
   const [searchResults, setSearchResults] = useState<LocationData[]>([])
   const [searchedLocations, setSearchedLocations] = useState<string[]>([])
-  const [coordinates, setCoordinates] = useState(initialCoordinates)
   const [isUnitMetric, setIsUnitMetric] = useState<boolean>(true)
   const [weatherData, setWeatherData] = useState<WeatherData | undefined>(undefined)
 

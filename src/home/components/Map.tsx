@@ -5,9 +5,10 @@ import '../styles.scss'
 
 type GoogleMapsProps = {
   center: google.maps.LatLngLiteral
+  markerPosition: google.maps.LatLngLiteral
 }
 
-const GoogleMaps = ({center}: GoogleMapsProps) => {
+const GoogleMaps = ({center, markerPosition}: GoogleMapsProps) => {
   const ref = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
@@ -17,21 +18,22 @@ const GoogleMaps = ({center}: GoogleMapsProps) => {
         zoom: 12,
       })
       new google.maps.Marker({
-        position: center,
+        position: markerPosition,
         map,
       })
     }
-  }, [ref, center])
+  }, [ref, center, markerPosition])
 
-  return <div className="map" ref={ref} />
+  return <div className="map-container" ref={ref} />
 }
 
 type MapComponentProps = {
-  coordinates: Coordinates
+  mapCoordinates: Coordinates
+  userCoordinates: Coordinates
 }
 
-export const MapComponent = ({coordinates}: MapComponentProps) => (
+export const MapComponent = ({mapCoordinates, userCoordinates}: MapComponentProps) => (
   <Wrapper apiKey={`${process.env.REACT_APP_GOOGLE_API_KEY}`}>
-    <GoogleMaps center={coordinates} />
+    <GoogleMaps center={mapCoordinates} markerPosition={userCoordinates} />
   </Wrapper>
 )

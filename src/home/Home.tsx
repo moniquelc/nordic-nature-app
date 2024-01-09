@@ -7,33 +7,35 @@ import {Loading} from './components/Loading'
 import './styles.scss'
 
 export const Home = () => {
-  const [coordinates, setCoordinates] = useState<Coordinates | null>(null)
+  const [mapCoordinates, setMapCoordinates] = useState<Coordinates | null>(null)
+  const [userCoordinates, setUseCoordinates] = useState<Coordinates | null>(null)
+
+  const hasCoordinates = mapCoordinates && userCoordinates
 
   const success = (position: GeolocationPosition) => {
     const {coords} = position
-    return setCoordinates({
+    const coordinations = {
       lat: coords.latitude,
       lng: coords.longitude,
-    })
+    }
+    setUseCoordinates(coordinations)
+    return setMapCoordinates(coordinations)
   }
 
   const error = () => console.log('error - unable to retrieve user location')
 
-  if (!coordinates) {
+  if (!hasCoordinates) {
     navigator.geolocation.getCurrentPosition(success, error)
   }
 
   return (
     <div className="home-container">
       <Navbar />
-      {coordinates ? (
+      {hasCoordinates ? (
         <>
           <div className="home-content-container">
-            <Search initialCoordinates={coordinates} />
-            <div className="map-container">
-              <h2 className="map-header">Your current location</h2>
-              <MapComponent coordinates={coordinates} />
-            </div>
+            <Search coordinates={mapCoordinates} setCoordinates={setMapCoordinates} />
+            <MapComponent mapCoordinates={mapCoordinates} userCoordinates={userCoordinates} />
           </div>
         </>
       ) : (
