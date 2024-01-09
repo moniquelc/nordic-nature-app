@@ -107,11 +107,14 @@ export const Search = ({coordinates, setCoordinates}: SearchProps) => {
         <div className="cards-container">
           <h4>Recently searched locations:</h4>
           <div className="flex-container">
-            {searchedLocations.slice(-3).map((location, index) => (
-              <div className="location-card " key={index}>
-                <p>{location}</p>
-              </div>
-            ))}
+            {searchedLocations
+              .slice(-3)
+              .reverse()
+              .map((location, index) => (
+                <div className="location-card " key={index}>
+                  <p>{location}</p>
+                </div>
+              ))}
           </div>
         </div>
       )}
