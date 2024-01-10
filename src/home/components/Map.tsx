@@ -11,16 +11,30 @@ interface GoogleMapsProps {
 const GoogleMaps: React.FC<GoogleMapsProps> = ({ center, markerPosition }) => {
   const ref = useRef<HTMLDivElement | null>(null)
 
+  const contentString =
+    '<div id="content">' +
+    '<h3 id="firstHeading" class="firstHeading">Your location</h3>' +
+    '</div>'
+
   useEffect(() => {
-    if (ref.current !== null) {
+    if (ref.current) {
       const map = new window.google.maps.Map(ref.current, {
         center,
         zoom: 12
       })
-      // eslint-disable-next-line no-new
-      new google.maps.Marker({
+      const infowindow = new google.maps.InfoWindow({
+        content: contentString
+      })
+
+      const marker = new google.maps.Marker({
         position: markerPosition,
         map
+      })
+      marker.addListener('click', () => {
+        infowindow.open({
+          anchor: marker,
+          map
+        })
       })
     }
   }, [ref, center, markerPosition])
