@@ -69,7 +69,7 @@ export const Search: React.FC<SearchProps> = ({ coordinates, setCoordinates }) =
           <Autocomplete
             options={searchResults}
             getOptionLabel={({ name, state, country }) =>
-              state !== null ? `${name}, ${state}, ${country}` : `${name}, ${country}`
+              state ? `${name}, ${state}, ${country}` : `${name}, ${country}`
             }
             sx={{ width: 300 }}
             filterOptions={x => x}
@@ -91,7 +91,7 @@ export const Search: React.FC<SearchProps> = ({ coordinates, setCoordinates }) =
             )}
           />
         </div>
-        {weatherData !== null && weatherData !== undefined && (
+        {weatherData && (
           <Weather
             data={weatherData}
             isUnitMetric={isUnitMetric}
